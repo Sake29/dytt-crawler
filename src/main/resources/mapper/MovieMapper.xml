@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sake.dyttcrawler.mapper.MovieMapper">
+
+    <resultMap id="BaseResultMap" type="com.sake.dyttcrawler.entity.Movie">
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="name" property="movieName" jdbcType="VARCHAR" />
+        <result column="aka" property="aka" jdbcType="VARCHAR" />
+        <result column="url" property="movieUrl" jdbcType="VARCHAR" />
+        <result column="magnet" property="magnet" jdbcType="LONGVARCHAR" />
+        <result column="img_url" property="imgUrl" jdbcType="LONGVARCHAR" />
+        <result column="db_score" property="dbScore" jdbcType="VARCHAR" />
+        <result column="imdb_score" property="imdbScore" jdbcType="VARCHAR" />
+        <result column="length" property="length" jdbcType="VARCHAR" />
+        <result column="country" property="country" jdbcType="VARCHAR" />
+        <result column="year" property="year" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="VARCHAR" />
+        <result column="director" property="director" jdbcType="VARCHAR" />
+    </resultMap>
+    
+    <insert id="insert" parameterType="com.sake.dyttcrawler.entity.Movie">
+            insert into movie
+            (name, aka, url,magnet, img_url,db_score, imdb_score, length, country, year, type, director)
+            values
+            (#{movieName,jdbcType=VARCHAR}, #{aka,jdbcType=VARCHAR}, #{movieUrl,jdbcType=VARCHAR},
+              #{magnet,jdbcType=VARCHAR}, #{imgUrl,jdbcType=VARCHAR}, #{dbScore,jdbcType=VARCHAR},
+              #{imdbScore,jdbcType=REAL}, #{length,jdbcType=REAL}, #{country,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+              #{type,jdbcType=VARCHAR}, #{director,jdbcType=VARCHAR})
+            on duplicate key update
+            name = #{movieName,jdbcType=VARCHAR},
+            aka = #{aka,jdbcType=VARCHAR},
+            magnet = #{magnet,jdbcType=VARCHAR},
+            img_url = #{imgUrl,jdbcType=VARCHAR},
+            db_score = #{dbScore,jdbcType=VARCHAR},
+            imdb_score = #{imdbScore,jdbcType=REAL},
+            length = #{length,jdbcType=REAL},
+            country = #{country,jdbcType=VARCHAR},
+            year = #{year,jdbcType=VARCHAR},
+            type = #{type,jdbcType=VARCHAR},
+            director = #{director,jdbcType=VARCHAR}
+    </insert>
+</mapper>
